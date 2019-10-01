@@ -20,63 +20,9 @@ class LanchoneteService{
     	$ingrediente = $this->getIngredientsValues();
     	
     	return [
-    		'xBacon'    =>[
-    			'bacon'=>[
-    				'qtd'=>1,
-    				'preco'=>$ingrediente['bacon']
-    			],
-    			'hamburguerDeCarne'=>[
-    				'qtd'=>1,
-    				'preco'=>$ingrediente['hamburguerDeCarne']
-    			],
-    			'queijo'=>[
-    				'qtd'=>1,
-    				'preco'=>$ingrediente['queijo']
-    			]
-    		],
-    		'xBurger'   =>[
-    			'hamburguerDeCarne'=>[
-    				'qtd'=>1,
-    				'preco'=>$ingrediente['hamburguerDeCarne']
-    			],
-    			'queijo'=>[
-    				'qtd'=>1,
-    				'preco'=>$ingrediente['queijo']
-    			]
-    		],
-    		'xEgg'     =>[
-    			'ovo'=>[
-    				'qtd'=>1,
-    				'preco'=>$ingrediente['ovo']
-    			],
-    			'hamburguerDeCarne'=>[
-    				'qtd'=>1,
-    				'preco'=>$ingrediente['hamburguerDeCarne']
-    			],
-    			'queijo'=>['qtd'=>1,'preco'=>$ingrediente['queijo']]
-    		],
-    		'xEggBacon'=>[
-    			'ovo'=>[
-    				'qtd'=>1,
-    				'preco'=>$ingrediente['ovo']
-    			],
-
-    			'bacon'=>[
-    				'qtd'=>1,
-    				'preco'=>$ingrediente['bacon']
-    			],
-    			'hamburguerDeCarne'=>[
-    				'qtd'=>1,
-    				'preco'=>$ingrediente['hamburguerDeCarne']
-    			],
-    			'queijo'=>[
-    				'qtd'=>1,
-    				'preco'=>$ingrediente['queijo']
-    			]
-    		],
     		'meuSanduba'=>[
     			'ovo'=>[
-    				'qtd'=>3,
+    				'qtd'=>0,
     				'preco'=>$ingrediente['ovo']
     			],
 
@@ -94,10 +40,63 @@ class LanchoneteService{
     			],
     			'alface'=>[
     				'qtd'=>1,
-    				'preco'=>$ingrediente['queijo']
+    				'preco'=>$ingrediente['alface']
     			]
+    		],
+    		'xBacon'    =>[
+    		 	'bacon'=>[
+    		 		'qtd'=>1,
+    		 		'preco'=>$ingrediente['bacon']
+    		 	],
+    		 	'hamburguerDeCarne'=>[
+    		 		'qtd'=>1,
+    		 		'preco'=>$ingrediente['hamburguerDeCarne']
+    		 	],
+    		 	'queijo'=>[
+    		 		'qtd'=>1,
+    		 		'preco'=>$ingrediente['queijo']
+    		 	]
+    		],
+    		'xBurger'   =>[
+    		 	'hamburguerDeCarne'=>[
+    		 		'qtd'=>1,
+    		 		'preco'=>$ingrediente['hamburguerDeCarne']
+    		 	],
+    		 	'queijo'=>[
+    		 		'qtd'=>1,
+    		 		'preco'=>$ingrediente['queijo']
+    		 	]
+    		],
+    		'xEgg'     =>[
+    		 	'ovo'=>[
+    		 		'qtd'=>1,
+    		 		'preco'=>$ingrediente['ovo']
+    		 	],
+    		 	'hamburguerDeCarne'=>[
+    		 		'qtd'=>1,
+    		 		'preco'=>$ingrediente['hamburguerDeCarne']
+    		 	],
+    		 	'queijo'=>['qtd'=>1,'preco'=>$ingrediente['queijo']]
+    		],
+    		'xEggBacon'=>[
+    		 	'ovo'=>[
+    		 		'qtd'=>1,
+    		 		'preco'=>$ingrediente['ovo']
+    		 	],
+    		 	'bacon'=>[
+    		 		'qtd'=>1,
+    		 		'preco'=>$ingrediente['bacon']
+    		 	],
+    		 	'hamburguerDeCarne'=>[
+    		 		'qtd'=>1,
+    		 		'preco'=>$ingrediente['hamburguerDeCarne']
+    		 	],
+    		 	'queijo'=>[
+    		 		'qtd'=>1,
+    		 		'preco'=>$ingrediente['queijo']
+    		 	]
     		]
-    	];
+		];
     }
 
     public function calculate(){
@@ -105,9 +104,9 @@ class LanchoneteService{
 
     	if (is_array($data) && !empty($data)) {
     		$total = 0;
-    		$promo = [];
 
     		foreach ($data as $lanche => $ingredientes){
+    			$promo = [];
 	    		$valorLanche = 0;
 	    		$descontoLight = 0;
 	    		$temAlface = false;
@@ -122,19 +121,19 @@ class LanchoneteService{
     					}
     					for ($i=1; $i <= $conteudo['qtd']; $i++) { 
 	    					if (!is_int($i/3)) {
-	    						$valorLanche = ($valorLanche+$conteudo['preco']);
+	    						$valorLanche = ($valorLanche + $conteudo['preco']);
 	    					}
     					}
     				} else if($ingrediente =='alface'){
     					if ($conteudo['qtd'] > 0) {
 	    					$temAlface = true;
-    						$valorLanche +=($conteudo['preco'] * $conteudo['qtd']);
+    						$valorLanche = $valorLanche + ($conteudo['preco'] * $conteudo['qtd']);
 	    				}
     				} else if($ingrediente =='bacon'){
     					if ($conteudo['qtd'] == 0) {
 	    					$naoTemBacon = true;
 	    				} else {
-    						$valorLanche +=($conteudo['preco'] * $conteudo['qtd']);
+    						$valorLanche = $valorLanche + ($conteudo['preco'] * $conteudo['qtd']);
 	    				}
     				} else {
     					if ($conteudo['qtd'] > 0) {
@@ -143,18 +142,19 @@ class LanchoneteService{
     				}
     			}
     			if ($temAlface && $naoTemBacon) {
-    				array_push($promo, 'Desconto Light') ;
+    				array_push($promo, 'DescontoLight') ;
     				$descontoLight = ($valorLanche * 0.1);
     			}
 
-				$valorLanche = ($valorLanche - $descontoLight);
+				$totalLanche = ($valorLanche - $descontoLight);
+				$total += $totalLanche;
 
-				$total += $valorLanche;
 				debug([
 					'$lanche'=>$lanche,
 					'$promo'=>$promo,
 					'$valorLanche'=>$valorLanche,
 					'$descontoLight'=>$descontoLight,
+					'$totalLanche'=>$totalLanche,
 					'$temAlface'=>$temAlface,
 					'$naoTemBacon'=>$naoTemBacon,
 					'$total'=>$total
