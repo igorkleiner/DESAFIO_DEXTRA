@@ -14,7 +14,6 @@
 			self.nome  = nome;
 			self.qtd   = ko.observable(qtd);
 			self.preco = preco;
-
 		}
 
 		function Lanche(lancheNome)
@@ -32,6 +31,17 @@
 				var callback = function(dados){
 					// aqui não consigo dar foreach
 					console.log(dados.response);
+					var cardapio = dados.response;
+					ko.utils.arrayMap(Object.keys(cardapio), function(lanche) { 
+						console.log(cardapio[lanche]);
+						ko.utils.arrayMap(Object.keys(cardapio[lanche]), function(ingrediente) { 
+							console.log(ingrediente); 
+							ko.utils.arrayMap(Object.keys(cardapio[lanche][ingrediente]), function(conteudo) { 
+								console.log(conteudo); 
+								console.log(cardapio[lanche][ingrediente][conteudo]); 
+							}) 
+						}) 
+					})
 					
 				}
 				globalViewModel.ajax("{{Route('getMenu')}}", {teste:true},callback);               
