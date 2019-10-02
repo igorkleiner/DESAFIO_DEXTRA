@@ -40,7 +40,7 @@
                     url:url,
                     data:dadosPost,
                     dataType:'json',
-                    method:'post',
+                    method:'POST',
                     headers:headers
                 })
                 .done(function(response){

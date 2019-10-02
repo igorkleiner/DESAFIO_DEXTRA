@@ -16,7 +16,7 @@ Route::get('/', function () {
 });
 
 
-Route::get('/getIngredients', 'LanchoneteControler@getIngredients');
-Route::post('/getMenu', 'LanchoneteControler@getMenu')->name('getMenu');
-Route::any('/calculate', 'LanchoneteControler@calculate');
+Route::any('/getIngredientes', 'LanchoneteControler@getIngredientes')->name('getIngredientes');;
+Route::any('/getMenu', 'LanchoneteControler@getMenu')->name('getMenu');
+Route::post('/calculate', 'LanchoneteControler@calculate')->name('calculate');
 
