@@ -112,35 +112,36 @@ class LanchoneteService{
             
     		foreach ($data as $lanche => $content){
                 foreach ($content as $key => $value) {
-                    if ($key !='selecionado') {
+                    if ($key =='lancheNome' || $key =='ingredientes') {
                         if ($key =='lancheNome') {
                             $lancheNome = $value;
                         } else {
-                			$promo = [];
+                			$promos = [];
             	    		$valorLanche = 0;
             	    		$descontoLight = 0;
             	    		$temAlface = false;
-            	    		$naoTemBacon =false;
+                            $semBacon = true;
                             foreach ($value as $ingrediente => $conteudo){
-                                if ($ingrediente =='hamburguerDeCarne' || $ingrediente =='queijo') {
-                                    if ($ingrediente =='hamburguerDeCarne' && $conteudo['qtd'] >=3) {
-                                       array_push($promo, 'MuitaCarne') ;
-                                    } else if($ingrediente =='queijo' && $conteudo['qtd'] >=3){
-                                       array_push($promo, 'MuitoQueijo') ;
+                                if ($conteudo['nome'] =='hamburguerDeCarne' || $conteudo['nome'] =='queijo') {
+                                    if ($conteudo['nome'] =='hamburguerDeCarne' && $conteudo['qtd'] >=3) {
+                                       array_push($promos,['promo' => 'MuitaCarne']) ;
+                                    } else if($conteudo['nome'] =='queijo' && $conteudo['qtd'] >=3){
+                                       array_push($promos,['promo' => 'MuitoQueijo']) ;
                                     }
                                     for ($i=1; $i <= $conteudo['qtd']; $i++) { 
                                        if (!is_int($i/3)) {
                                            $valorLanche = ($valorLanche + $conteudo['preco']);
                                        }
                                     }
-                                } else if($ingrediente =='alface'){
+                                } else if($conteudo['nome'] =='alface'){
                                     if ($conteudo['qtd'] > 0) {
                                         $temAlface = true;
                                         $valorLanche = $valorLanche + ($conteudo['preco'] * $conteudo['qtd']);
                                     }
-                                } else if($ingrediente =='bacon'){
+                                } else if($conteudo['nome'] =='bacon'){
+                                    $semBacon = false;
                                     if ($conteudo['qtd'] == 0) {
-                                       $naoTemBacon = true;
+                                       $semBacon = true;
                                     } else {
                                        $valorLanche = $valorLanche + ($conteudo['preco'] * $conteudo['qtd']);
                                     }
@@ -155,8 +156,8 @@ class LanchoneteService{
                 }
 
     			
-    			if ($temAlface && $naoTemBacon) {
-    				array_push($promo, 'DescontoLight') ;
+    			if ($temAlface && $semBacon) {
+    				array_push($promos,['promo' => 'DescontoLight']) ;
     				$descontoLight = ($valorLanche * 0.1);
     			}
 
@@ -164,18 +165,18 @@ class LanchoneteService{
 				$total += $totalLanche;
 
 				debug([
-					// '$nome'=>$lanche,
-					'$promo'=>$promo,
+					'$lancheNome'=>$lancheNome,
+					'$promo'=>$promos,
 					'$valorLanche'=>$valorLanche,
 					'$descontoLight'=>$descontoLight,
 					'$totalLanche'=>$totalLanche,
 					'$temAlface'=>$temAlface,
-					'$naoTemBacon'=>$naoTemBacon,
+					'$semBacon'=>$semBacon,
 					'$total'=>$total
 				]);
                 $lanches[] = [
-                    // 'nome'=>$lanche,
-                    'promo'=>$promo,
+                    'lancheNome'=>$lancheNome,
+                    'promos'=>$promos,
                     'valorLanche'=>$valorLanche,
                     'descontoLight'=>$descontoLight,
                     'totalLanche'=>$totalLanche
