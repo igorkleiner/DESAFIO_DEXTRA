@@ -244,7 +244,6 @@
 			self.lanches = ko.observableArray();
 			self.calcular = function(){
 				var callback = function(dados){
-					console.log(dados);
 					var lanches = [];
 					ko.utils.arrayMap(dados.response.Lanches,function(lanche){
 						lanches.push(lanche);
@@ -297,11 +296,9 @@
 			}
 			self.getIngredientes = function(){
 				var callback = function(dados){
-					// console.log(dados);
 					self.selectIngrediente = ko.utils.arrayMap(Object.keys(dados.response), function(i) {
 						return{ 'nome' :i, 'valor': dados.response[i] };
 					}) 
-					console.log(self.selectIngrediente);
 				}
 				globalViewModel.ajax("{{Route('getIngredientes')}}", {},callback);
 			}
