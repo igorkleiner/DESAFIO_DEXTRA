@@ -30,3 +30,8 @@ desconto aplicado, o valor total do lanche e uma somatoria total da conta.
 O nome do lanche pode ser editado também para compor novos tipos.
 	Novos tipos não serão adicionados ao cardapio ( cardapio default.);
 
+Tecnologias utilizadas:
+	LARAVEL PHP Framework
+		Promove solidez nos requests, e quando utilizado com as encriptações, permite trafego seguro de informações.
+	KNOCKOUTJS
+		Tem facil adaptação dentro de qualquer framework de backend e agrega muita performance para o front-end.
