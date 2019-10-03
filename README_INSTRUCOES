@@ -12,6 +12,12 @@ Abra um console de comandos na pasta raiz do projeto e rode o comando
 
 apos a finalização da instalação, Abra o host que foi configurado no IIS;
 
+Copie o conteudo do arquivo .env.example e crie um novo arquivo com o nome .env .
+Cole o conteudo do exemplo dentro e salve.
+
+rode o arquivo 'php artisan key:generate';
+
+
 A tela deve apresentar um cardapio básico com os lanches.
 Clique em solicitar, e o lanche sera adicionado ao campo do pedido.
 Varios lanches podem ser adicionados ao pedido.
