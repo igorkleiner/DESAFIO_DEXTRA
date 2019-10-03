@@ -134,12 +134,6 @@
 					<div class="modal-body">
 						<div class="row">
 							<div class=" col-md-12">
-								<h3>
-									<b>
-										<span type='text' >Valor Total:</span><br>       
-										<span type='text' data-bind="text:total"></span>       
-									</b>
-								</h3> 
 								<table class="table table-bordered table-striped">
 									<thead>
 										<tr>                
@@ -162,8 +156,13 @@
 											<td><span type='text' data-bind="text:totalLanche"></span></td>
 		                                </tr>
 		                            </tbody>                                    
-			                        
 		                        </table>
+		                        <h3>
+									<b>
+										<span type='text' >Valor Total:</span>      
+										<span type='text' data-bind="text:total"></span>       
+									</b>
+								</h3> 
 		                    </div>
 		                </div>
 		            </div>
