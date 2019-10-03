@@ -250,7 +250,6 @@
 						lanches.push(lanche);
 					});
 					var temp = new Conta(dados.response.Total,lanches);
-					debugger;
 					viewModel.resultadoModal(temp);
 					$("#resultadoModal").modal('show');
 
@@ -277,7 +276,6 @@
 			self.lancheModal = ko.observable();
 			self.resultadoModal = ko.observable();
 			self.selectIngrediente = [];
-			// self.selectIngrediente = ko.observableArray();
 			self.ingredienteSelecionado = ko.observable();
 			
 
