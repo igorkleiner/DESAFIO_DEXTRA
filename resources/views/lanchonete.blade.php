@@ -189,7 +189,8 @@
 			self.ingredientes  = ko.observableArray(ingredientes);
 			
 			self.pedir = function(){
-				viewModel.pedido().lanches.push(self);
+
+				viewModel.pedido().lanches.push(new Lanche(self.lancheNome(),self.ingredientes()));
 			}
 			self.editar = function(){
 				viewModel.lancheModal(self);
