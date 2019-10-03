@@ -66,7 +66,7 @@
 	            
 	        </table>
 		</div>
-	<!-- Modal -->
+	<!-- Modal EDITAR LANCHE -->
 		<div id='lancheModal' class="modal fade" role="dialog" data-backdrop="static" data-keyboard="false">
 			<div class="modal-dialog modal-lg">
 				<div class="modal-content" data-bind= "with:lancheModal">
@@ -121,7 +121,7 @@
 		    </div><!-- /.modal-dialog -->
 		</div>
 	<!-- /.modal -->
-	<!-- Modal -->
+	<!-- Modal RESULTADO -->
 		<div id='resultadoModal' class="modal fade" role="dialog" data-backdrop="static" data-keyboard="false">
 			<div class="modal-dialog modal-lg">
 				<div class="modal-content" data-bind= "with:resultadoModal">
@@ -189,7 +189,6 @@
 			self.ingredientes  = ko.observableArray(ingredientes);
 			
 			self.pedir = function(){
-
 				viewModel.pedido().lanches.push(new Lanche(self.lancheNome(),self.ingredientes()));
 			}
 			self.editar = function(){
@@ -226,7 +225,9 @@
 	        	var done = false;
 	        	ko.utils.arrayMap(self.ingredientes(),function(ingrediente){
 	        		if (viewModel.ingredienteSelecionado().indexOf(ingrediente.nome)!=-1) {
-	        			return ingrediente.qtd(ingrediente.qtd()-1);
+	        			if (ingrediente.qtd() > 0) {
+	        				return ingrediente.qtd(ingrediente.qtd()-1);
+	        			}
 	        		} 		        		 
 	        	})
 	        }
