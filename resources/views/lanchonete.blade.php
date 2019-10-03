@@ -37,7 +37,7 @@
 			<table class="table table-bordered table-striped">
 				<thead>
 					<tr class='warning'>                     
-	                    <th ><button class= "btn btn-success pull-center"  data-bind = " click:calcular">Calcular</button></th>
+	                    <th ><button class= "btn btn-danger pull-center"  data-bind = " click:calcular">Calcular</button></th>
 	                    <th >Pedido</th>
 	                    <th ><span data-bind="text:nome"></th>
 	                </tr>
