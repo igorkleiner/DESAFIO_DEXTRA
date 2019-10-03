@@ -17,7 +17,6 @@
         <div style="padding: 5px;">     
             <div class="container">
                 @include('layout.head') 
-                @include('layout.confirmModal') 
                 @yield('content')
             </div>  
         </div>      
