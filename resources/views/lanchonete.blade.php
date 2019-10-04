@@ -23,6 +23,7 @@
 	                    <td><span data-bind="text:lancheNome"></span></td>
 	                    <td data-bind="foreach:ingredientes">
 	                		<!-- ko if: qtd() > 0 -->
+	                    		<!-- <span data-bind="text:qtd"> </span> -->
 	                    		<span data-bind="text:nome"> </span> &nbsp &nbsp
 	                    	<!-- /ko -->
 	                    </td>
@@ -189,7 +190,13 @@
 			self.ingredientes  = ko.observableArray(ingredientes);
 			
 			self.pedir = function(){
-				viewModel.pedido().lanches.push(new Lanche(self.lancheNome(),self.ingredientes()));
+				var nome = JSON.parse(ko.toJSON(self.lancheNome()));
+				var temp = JSON.parse(ko.toJSON(self.ingredientes()));
+				var ingredientes = [];
+				ko.utils.arrayMap(temp,function(t){
+					ingredientes.push(new Ingrediente(t.nome, t));
+				});
+				viewModel.pedido().lanches.push(new Lanche(nome,ingredientes));
 			}
 			self.editar = function(){
 				viewModel.lancheModal(self);
@@ -201,10 +208,10 @@
 	        }
 	        self.add = function(){
 	        	var done = false;
-	        	ko.utils.arrayMap(self.ingredientes(),function(ingrediente){
-	        		if (viewModel.ingredienteSelecionado().indexOf(ingrediente.nome)!=-1) {
+	        	ko.utils.arrayMap(self.ingredientes(),function(ing){
+	        		if (viewModel.ingredienteSelecionado().indexOf(ing.nome)!=-1) {
 	        			done = true;
-	        			return ingrediente.qtd(ingrediente.qtd()+1);
+	        			return ing.qtd(ing.qtd()+1);
 	        		} 		        		 
 	        	})
 	        	if(!done){
