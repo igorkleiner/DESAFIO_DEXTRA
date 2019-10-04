@@ -204,6 +204,7 @@
 			}
 			self.fechar = function()
 	        {
+	        	viewModel.ingredienteSelecionado('');
 	            $("#lancheModal").modal('hide');
 	        }
 	        self.add = function(){
@@ -318,11 +319,6 @@
 
 	    var viewModel = new ViewModel;
 	    
-	    
-	    $(function()
-	    {
-	        ko.applyBindings(viewModel,document.getElementById('cardapio'));
-	    });
+	    $(function(){ko.applyBindings(viewModel,document.getElementById('cardapio'));});
 	</script>
-
 @stop

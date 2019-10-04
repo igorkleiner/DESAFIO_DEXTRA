@@ -7,10 +7,10 @@ class LanchoneteService{
 	public function getIngredientes(){
     	return [
     		'hamburguerDeCarne' =>3,
-    		'bacon'               =>2,
-    		'queijo'              =>1.5,
-    		'ovo'                 =>0.8,
-    		'alface'              =>0.4
+    		'bacon'             =>2,
+    		'queijo'            =>1.5,
+    		'ovo'               =>0.8,
+    		'alface'            =>0.4
     	];
     }
 
