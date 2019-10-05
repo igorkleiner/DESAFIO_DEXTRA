@@ -11,9 +11,9 @@ git clone https://github.com/igorkleiner/DESAFIO_DEXTRA.git
 ```sh
 $ cp .env.example .env
 
-$ php artisan key:generate
-
 $ composer install
+
+$ php artisan key:generate
 
 $ php artisan serve --port 8000
 ```
