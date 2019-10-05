@@ -1,22 +1,24 @@
-Instruções de utilização:
+# Instruções de utilização:
 
-Baixe o código e abra o zip em uma pasta local;
+1. Baixe o código 
 
-Insira um site no IIS do windows ou server semelhante no Linux
-Utilize a versão 7.22 do PHP
+```sh
+git clone https://github.com/igorkleiner/DESAFIO_DEXTRA.git
+```
 
-Certifique-se de que´há disponivel a versão 7.2.2 do php nas variaveis de ambiente.
+2. Entre na pasta onde o projeto foi clonado e execute os comandos a seguir
 
-Abra um console de comandos na pasta raiz do projeto e rode o comando
-"composer install";
+```sh
+$ cp .env.example .env
 
-apos a finalização da instalação, Abra o host que foi configurado no IIS;
+$ php artisan key:generate
 
-Copie o conteudo do arquivo .env.example e crie um novo arquivo com o nome .env .
-Cole o conteudo do exemplo dentro e salve.
+$ composer install
 
-rode o arquivo 'php artisan key:generate';
+$ php artisan serve --port 8000
+```
 
+3. Abra seu browser na porta 8000 [http://localhost:8000](http://localhost:8000)
 
 A tela deve apresentar um cardapio básico com os lanches.
 Clique em solicitar, e o lanche sera adicionado ao campo do pedido.
@@ -28,10 +30,11 @@ valores individuais dos lanches, as promoções ao quao o lanche se enquadrou, o
 desconto aplicado, o valor total do lanche e uma somatoria total da conta.
 
 O nome do lanche pode ser editado também para compor novos tipos.
-	Novos tipos não serão adicionados ao cardapio ( cardapio default.);
+Novos tipos não serão adicionados ao cardapio ( cardapio default.);
 
-Tecnologias utilizadas:
-	LARAVEL PHP Framework
-		Promove solidez nos requests, e quando utilizado com as encriptações, permite trafego seguro de informações.
-	KNOCKOUTJS
-		Tem facil adaptação dentro de qualquer framework de backend e agrega muita performance para o front-end.
+## Tecnologias utilizadas:
+
+*  LARAVEL PHP Framework (Back-End) [conhça mais sobre Laravel](https://laravel.com):
+   * Promove solidez nos requests, e quando utilizado com as encriptações, permite trafego seguro de informações.
+* KNOCKOUTJS (Front-End) [conheça mais sobre Knockoutjs](https://knockoutjs.com):
+    * Tem facil adaptação dentro de qualquer framework de backend e agrega muita performance para o front-end.

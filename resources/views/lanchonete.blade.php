@@ -230,7 +230,6 @@
     			}
 	        }
 	        self.remo = function(){
-	        	var done = false;
 	        	ko.utils.arrayMap(self.ingredientes(),function(ingrediente){
 	        		if (viewModel.ingredienteSelecionado().indexOf(ingrediente.nome)!=-1) {
 	        			if (ingrediente.qtd() > 0) {
